@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="02_Collections/02_Collections.csproj" />
   <Project Path="02_Generic/02_Generic.csproj" />
 </Solution>
