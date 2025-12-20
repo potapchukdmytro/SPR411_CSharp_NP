@@ -1,7 +1,16 @@
-﻿using System.Text;
+﻿using System.IO;
+using System.Text;
 
 namespace _03_Files
 {
+    class MyStream : IDisposable
+    {
+        public void Dispose()
+        {
+            Console.WriteLine("Dispose called");
+        }
+    }
+
     internal class Program
     {
         // FileStream
@@ -86,9 +95,89 @@ namespace _03_Files
             fileStream.Close();
         }
 
+        static void DisposeTmp()
+        {
+            // using працює тілкьи з класами які реалізувати IDisposable
+            // using це try finally який у finally викликає метод Dispose
+
+            try
+            {
+                using (Stream stream = new FileStream("lorem.txt", FileMode.Open, FileAccess.Read))
+                {
+                    byte[] buffer = new byte[stream.Length];
+                    int l = stream.Read(buffer);
+
+                    string text = Encoding.UTF8.GetString(buffer, 0, l);
+                    Console.WriteLine(text);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        static void DirectoryFileTmp()
+        {
+            // Directory
+
+            string appPath = Directory.GetCurrentDirectory();
+
+            string path = Path.Combine(appPath, "spr411");
+            //var ext = Path.GetExtension("myfile.txt");
+            //string newFile = "file" + ext;
+            //Directory.CreateDirectory(path);
+            // Directory.Delete(path);
+
+            string[] files = Directory.GetFiles(appPath);
+            //string[] dirs = Directory.GetDirectories("C:/");
+
+            //Console.WriteLine(Directory.GetParent(path));
+
+            // DirectoryInfo directory = new DirectoryInfo(appPath);
+
+
+            // File
+            using (var stream = File.Create("fileClass.bin"))
+            {
+
+            }
+
+
+            // write
+            File.WriteAllLines("files.txt", files);
+            File.WriteAllText("alltext.txt", string.Join(", ", files));
+
+            // read
+            string text = File.ReadAllText("files.txt");
+            Console.WriteLine(text);
+
+            string filePath = @"C:\Users\traig\CalorieAppDB.mdf";
+            //if(File.Exists(filePath))
+            //{
+            //    Console.WriteLine(File.ReadAllText(filePath));
+            //}
+            //byte[] bytes = File.ReadAllBytes(filePath);
+            //foreach (var b in bytes)
+            //{
+            //    Console.Write(b + " ");
+            //}
+
+            //FileInfo fileInfo = new FileInfo(filePath);
+            //Console.WriteLine(fileInfo.FullName);
+            //Console.WriteLine(fileInfo.Name);
+            //Console.WriteLine(fileInfo.Extension);
+            //Console.WriteLine(fileInfo.Exists);
+            //Console.WriteLine(fileInfo.Length);
+            //Console.WriteLine(fileInfo.CreationTime);
+            //Console.WriteLine(fileInfo.LastAccessTime);
+            //Console.WriteLine(fileInfo.LastWriteTime);
+        }
+
         static void Main(string[] args)
         {
-            
+            var fm = new FileManager();
+            fm.Start();
         }
     }
 }
