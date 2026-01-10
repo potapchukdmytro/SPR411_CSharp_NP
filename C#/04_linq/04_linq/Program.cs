@@ -210,31 +210,39 @@ namespace _04_linq
         {
             Console.OutputEncoding = Encoding.UTF8;
 
-            var shopItems = new List<ShopItem>
-            {
-                new ShopItem { Id = 1, Name = "Хліб", Price = 25.50m, Quantity = 100 },
-                new ShopItem { Id = 2, Name = "Молоко", Price = 32.00m, Quantity = 80 },
-                new ShopItem { Id = 3, Name = "Яйця", Price = 60.00m, Quantity = 50 },
-                new ShopItem { Id = 4, Name = "Сир", Price = 120.75m, Quantity = 40 },
-                new ShopItem { Id = 5, Name = "Масло", Price = 85.30m, Quantity = 35 },
-                new ShopItem { Id = 6, Name = "Цукор", Price = 28.90m, Quantity = 70 },
-                new ShopItem { Id = 7, Name = "Сіль", Price = 15.00m, Quantity = 90 },
-                new ShopItem { Id = 8, Name = "Кава", Price = 210.00m, Quantity = 25 },
-                new ShopItem { Id = 9, Name = "Чай", Price = 95.50m, Quantity = 45 },
-                new ShopItem { Id = 10, Name = "Шоколад", Price = 55.99m, Quantity = 60 }
-            };
+            //var shopItems = new List<ShopItem>
+            //{
+            //    new ShopItem { Id = 1, Name = "Хліб", Price = 25.50m, Quantity = 100 },
+            //    new ShopItem { Id = 2, Name = "Молоко", Price = 32.00m, Quantity = 80 },
+            //    new ShopItem { Id = 3, Name = "Яйця", Price = 60.00m, Quantity = 50 },
+            //    new ShopItem { Id = 4, Name = "Сир", Price = 120.75m, Quantity = 40 },
+            //    new ShopItem { Id = 5, Name = "Масло", Price = 85.30m, Quantity = 35 },
+            //    new ShopItem { Id = 6, Name = "Цукор", Price = 28.90m, Quantity = 70 },
+            //    new ShopItem { Id = 7, Name = "Сіль", Price = 15.00m, Quantity = 90 },
+            //    new ShopItem { Id = 8, Name = "Кава", Price = 210.00m, Quantity = 25 },
+            //    new ShopItem { Id = 9, Name = "Чай", Price = 95.50m, Quantity = 45 },
+            //    new ShopItem { Id = 10, Name = "Шоколад", Price = 55.99m, Quantity = 60 }
+            //};
 
 
-            var res = shopItems
-                .Where(i => i.Price >= 50)
-                .OrderBy(i => i.Price)
-                .Select(i => (i.Name, i.Price))
-                .ToList();
+            //var res = shopItems
+            //    .Where(i => i.Price >= 50)
+            //    .OrderBy(i => i.Price)
+            //    .Select(i => (i.Name, i.Price))
+            //    .ToList();
 
-            foreach (var item in res)
-            {
-                Console.WriteLine($"{item.Name} - {item.Price}");
-            }
+            //foreach (var item in res)
+            //{
+            //    Console.WriteLine($"{item.Name} - {item.Price}");
+            //}
+
+
+
+
+            // Garbage Collector
+            //Console.WriteLine("Total memoty before collect: " + GC.GetTotalMemory(false));
+            //GC.Collect();
+            //Console.WriteLine("Total memoty after collect: " + GC.GetTotalMemory(false));
         }
     }
 }
