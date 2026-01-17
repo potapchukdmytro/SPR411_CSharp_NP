@@ -69,7 +69,7 @@ namespace _04_linq
             var evenNumbers = from num in numbers
                               where num % 2 == 0
                               orderby num descending
-                              select num;
+                              select num * 2;
 
             //var orderedItems = from item in shopItems
             //                   where item.Price >= 50m && item.Quantity < 50
@@ -89,8 +89,6 @@ namespace _04_linq
 
         static void Methods()
         {
-            Console.OutputEncoding = Encoding.UTF8;
-
             // Method syntax
             var numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
@@ -130,11 +128,25 @@ namespace _04_linq
             res = numbers.Any(n => n < 0);
             Console.WriteLine($"Any numbers < 0: {res}");
 
-            // Aggregate - обрахунок значення на основі послідовності
-            int sum = numbers.Aggregate(1, (n, s) => n * s);
-            Console.WriteLine(sum);
+            if (shopItems.Any(i => i.Name == "Масло"))
+            {
+                var i = shopItems.First(i => i.Name == "Масло");
+                i.Quantity += 100;
+            }
+            else
+            {
+                shopItems.Add(new ShopItem { Id = 11, Name = "Масло", Price = 85.30m, Quantity = 100 });
+            }
 
-            sum = numbers.Sum();
+            res = shopItems.Any(); // поверне true, якщо колекція не порожня
+            res = shopItems.Count > 0;
+
+            // Aggregate - обрахунок значення на основі послідовності
+
+            int mul = numbers.Aggregate(1, (n, s) => n * s);
+            Console.WriteLine(mul);
+
+            int sum = numbers.Sum();
 
             // Append - додає елемент в кінець послідовності
             numbers = numbers.Append(11).ToList();
@@ -173,6 +185,7 @@ namespace _04_linq
 
             // Select - проєктує послідовність в нову форму
             var doubleNumber = numbers.Select(n => n * 2);
+
             var selectRes = shopItems.Select(i => i.Price);
             selectRes.Print();
 
@@ -209,32 +222,37 @@ namespace _04_linq
         static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
+            //Methods();
 
-            //var shopItems = new List<ShopItem>
-            //{
-            //    new ShopItem { Id = 1, Name = "Хліб", Price = 25.50m, Quantity = 100 },
-            //    new ShopItem { Id = 2, Name = "Молоко", Price = 32.00m, Quantity = 80 },
-            //    new ShopItem { Id = 3, Name = "Яйця", Price = 60.00m, Quantity = 50 },
-            //    new ShopItem { Id = 4, Name = "Сир", Price = 120.75m, Quantity = 40 },
-            //    new ShopItem { Id = 5, Name = "Масло", Price = 85.30m, Quantity = 35 },
-            //    new ShopItem { Id = 6, Name = "Цукор", Price = 28.90m, Quantity = 70 },
-            //    new ShopItem { Id = 7, Name = "Сіль", Price = 15.00m, Quantity = 90 },
-            //    new ShopItem { Id = 8, Name = "Кава", Price = 210.00m, Quantity = 25 },
-            //    new ShopItem { Id = 9, Name = "Чай", Price = 95.50m, Quantity = 45 },
-            //    new ShopItem { Id = 10, Name = "Шоколад", Price = 55.99m, Quantity = 60 }
-            //};
+            var shopItems = new List<ShopItem>
+            {
+                new ShopItem { Id = 1, Name = "Хліб", Price = 25.50m, Quantity = 100 },
+                new ShopItem { Id = 2, Name = "Молоко", Price = 32.00m, Quantity = 80 },
+                new ShopItem { Id = 3, Name = "Яйця", Price = 60.00m, Quantity = 50 },
+                new ShopItem { Id = 4, Name = "Сир", Price = 120.75m, Quantity = 40 },
+                new ShopItem { Id = 5, Name = "Масло", Price = 85.30m, Quantity = 35 },
+                new ShopItem { Id = 6, Name = "Цукор", Price = 28.90m, Quantity = 70 },
+                new ShopItem { Id = 7, Name = "Сіль", Price = 15.00m, Quantity = 90 },
+                new ShopItem { Id = 8, Name = "Кава", Price = 210.00m, Quantity = 25 },
+                new ShopItem { Id = 9, Name = "Чай", Price = 95.50m, Quantity = 45 },
+                new ShopItem { Id = 10, Name = "Шоколад", Price = 55.99m, Quantity = 60 }
+            };
 
 
-            //var res = shopItems
-            //    .Where(i => i.Price >= 50)
-            //    .OrderBy(i => i.Price)
-            //    .Select(i => (i.Name, i.Price))
-            //    .ToList();
+            var res = shopItems
+                .Where(i => i.Price >= 50)
+                .OrderBy(i => i.Price)
+                .Select(i => (i.Name, i.Price))
+                .ToList();
 
-            //foreach (var item in res)
-            //{
-            //    Console.WriteLine($"{item.Name} - {item.Price}");
-            //}
+            var lowPrice = shopItems
+                .OrderBy(i => i.Price)
+                .First();
+
+            foreach (var item in res)
+            {
+                Console.WriteLine($"{item.Name} - {item.Price}");
+            }
 
 
 
