@@ -1,0 +1,16 @@
+Створити 3 таблиці (Games, Genres, Publishers)
+Games <-> Genres (Many to Many)
+Games <-> Publishers (One to Many)
+
+Publishers та Games повинні мати мінімум 4 колонки (Id не рахується)
+
+Реалізувати для кожної таблиці CRUD методи
+CRUD - Create, Read, Update, Delete
+
+Для Games та Genres використати eager loading
+Для Games та Publishers використати explicit loading
+
+Також додати натупні методи: 
+ - Виводить всі ігри вказаного жанру
+ - Виводить жанри вказаної гри
+ - Виводить всі ігри видавця

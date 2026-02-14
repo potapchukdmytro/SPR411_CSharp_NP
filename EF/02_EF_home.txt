@@ -1,0 +1,58 @@
+Реалізувати проект для відеоігр
+
+Game
+	Id
+	Title
+	Price
+	ReleaseYear
+	DeveloperId
+	
+Developer
+	Id
+	Name
+	Country
+
+Customer
+	Id
+	FullName
+	Email
+
+Order
+	Id
+	CustomerId
+	OrderDate
+
+OrderItem
+	Id
+	OrderId
+	GameId
+	Quantity
+	
+	
+Зв’язки:
+
+Developer → Game
+(one-to-many)
+
+Customer → Order
+(one-to-many)
+
+Order ↔ Game
+(many-to-many)
+
+
+Seeder
+• 5 розробників
+• 10 ігор
+• 8 клієнтів
+• 10 замовлень
+• 20 позицій OrderItem
+
+
+Запити
+1. Вивести всі ігри з розробниками
+2. Вивести замовлення з клієнтами та іграми
+3. Порахувати суму кожного замовлення
+4. Топ 3 найдорожчі ігри
+5. Клієнти з більш ніж 1 замовленням
+6. Загальний дохід магазину
